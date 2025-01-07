@@ -71,6 +71,14 @@ variable "vpc_id" {
   description = "VPC ID"
 }
 
+variable "redis_parameter_group_family" {
+  default = "redis6.x"
+}
+
+variable "redis_parameter_group_name" {
+  default = "default.redis6.x"
+}
+
 variable "redis_parameters" {
   type        = "list"
   description = "additional parameters modifyed in parameter group"

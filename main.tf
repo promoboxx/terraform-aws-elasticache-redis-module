@@ -10,7 +10,7 @@ resource "aws_elasticache_replication_group" "redis" {
   automatic_failover_enabled    = "${var.redis_failover}"
   engine_version                = "${var.redis_version}"
   port                          = "${var.redis_port}"
-  parameter_group_name          = "${aws_elasticache_parameter_group.redis_parameter_group.id}"
+  parameter_group_name          = "${var.redis_parameter_group_name}"
   subnet_group_name             = "${aws_elasticache_subnet_group.redis_subnet_group.id}"
   security_group_ids            = ["${aws_security_group.redis_security_group.id}"]
   apply_immediately             = "${var.apply_immediately}"
@@ -26,7 +26,7 @@ resource "aws_elasticache_parameter_group" "redis_parameter_group" {
   description = "Terraform-managed ElastiCache parameter group for ${var.name}-${var.env}-${data.aws_vpc.vpc.tags["Name"]}"
 
   # Strip the patch version from redis_version var
-  family    = "redis${replace(var.redis_version, "/\\.[\\d]+$/","")}"
+  family    = "${var.redis_parameter_group_family}"
   parameter = "${var.redis_parameters}"
 }
 
