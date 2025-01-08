@@ -20,13 +20,13 @@ variable "apply_immediately" {
 }
 
 variable "allowed_cidr" {
-  type        = "list"
+  type        = list(string)
   default     = ["127.0.0.1/32"]
   description = "A list of Security Group ID's to allow access to."
 }
 
 variable "allowed_security_groups" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "A list of Security Group ID's to allow access to."
 }
@@ -57,7 +57,7 @@ variable "redis_port" {
 }
 
 variable "subnets" {
-  type        = "list"
+  type        = list(string)
   description = "List of VPC Subnet IDs for the cache subnet group"
 }
 
@@ -80,7 +80,7 @@ variable "redis_parameter_group_name" {
 }
 
 variable "redis_parameters" {
-  type        = "list"
+  type        = list(string)
   description = "additional parameters modifyed in parameter group"
   default     = []
 }
@@ -106,7 +106,8 @@ variable "tags" {
 }
 
 variable "snapshot_arn" {
-  type        = "list"
+  type        = list(string)
   description = "List with a single S3 ARN of a snapshot .rdb file to seed the new instance with.  Make sure the object in S3 allows Elasticache to read via object ACL's, per AWS documentation"
   default     = []
 }
+
